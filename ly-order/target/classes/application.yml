@@ -1,0 +1,49 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: order-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/heima?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  jackson:
+    default-property-inclusion: non_null
+  rabbitmq:
+    host: 192.168.236.128
+    username: leyou
+    password: leyou
+    virtual-host: /leyou
+    template:
+      retry:
+        enabled: true
+        initial-interval: 10000ms
+        max-interval: 30000ms
+        multiplier: 2
+      exchange: ly.item.exchange
+    publisher-confirms: true
+mybatis:
+  type-aliases-package: com.leyou.order.pojo
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+ly:
+  jwt:
+    pubKeyPath: D:\\tmp\\rsa\\rsa.pub # 公钥地址
+    cookieName: LY_TOKEN
+  worker:
+    workerId: 1
+    dataCenterId: 1
+  pay:
+    appId: wx8397f8696b538317
+    mchId: 1473426802
+    key: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
+    connectTimeoutMs: 5000
+    readTimeoutMs: 10000
+    notifyUrl: http://fte5w2.natappfree.cc/notify
